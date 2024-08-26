@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+
+        input[type="submit"] {
+            background-color: #27ae60;
+            color: #ffffff;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2em;
+            width: 100%;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #219150;
+        }
+
+        h2 {
+            text-align: center;
+            color: #16a085;
+            margin-top: 40px;
+        }
+
+        p {
+            font-size: 1.5em;
+            text-align: center;
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <h1>House Price Prediction</h1>
+
+    <form method="post" action="/predict">
+        <label>No of Bedrooms</label>
+        <input type="number" name="bedrooms" placeholder="Enter number of bedrooms"><br>
+
+        <label>No of Bathrooms</label>
+        <input type="number" name="bathrooms" placeholder="Enter number of bathrooms"><br>
+
+        <label>Location</label>
+        <select name="location">
+            <option value="0">AGIRIPALLI</option>
+            <option value="1">Ajit Singh Nagar</option>
+            <option value="2">Auto Nagar</option>
+            <option value="3">Ayyappa Nagar</option>
+            <option value="4">Bandar Road</option>
+            <option value="5">Benz Circle</option>
+            <option value="6">Bhavanipuram</option>
+            <option value="7">Currency Nagar</option>
+            <option value="8">Edupugallu</option>
+            <option value="9">G Konduru</option>
+            <option value="10">Gandhi Nagar</option>
+        </select><br>
+
+        <label>Area (in sqft)</label>
+        <input type="number" name="area" placeholder="Enter area in square feet"><br>
+
+        <label>Property Status</label>
+        <select name="status">
+            <option value="0">New</option>
+            <option value="1">Ready to move</option>
+            <option value="2">Resale</option>
+            <option value="3">Under Construction</option>
+        </select><br>
+
+        <label>Direction of Facing</label>
+        <select name="facing">
+            <option value="0">East</option>
+            <option value="1">None</option>
+            <option value="2">North</option>
+            <option value="3">NorthEast</option>
+            <option value="4">NorthWest</option>
+            <option value="5">South</option>
+            <option value="6">SouthEast</option>
+            <option value="7">SouthWest</option>
+            <option value="8">West</option>
+        </select><br>
+
+        <label>Type of Property</label>
+        <select name="type">
+            <option value="0">Apartment</option>
+            <option value="1">Independent Floor</option>
+            <option value="2">Independent House</option>
+            <option value="3">Residential Plot</option>
+        </select><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <h2>House Price Prediction Result</h2>
+    <p>Predicted House Price: ₹ {{ prediction }} Lakhs</p>
+</body>
+</html>
