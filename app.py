@@ -1,25 +1,20 @@
-
-
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request
 import pickle
 import numpy as np
 
-#create a Flask object
-app = Flask(__name__) #Flask application
-@app.route('/')
-def hello():
-    """test function"""
-    return "Welcome to PVP College"
-#app.run()
+app = Flask(__name__)
 
-#First let's read the pickle file
-with open('House.pkl','rb') as f:
+# Load the model
+with open('House.pkl', 'rb') as f:
     model = pickle.load(f)
-@app.route('/',methods=['GET'])
+
+@app.route('/', methods=['GET'])
 def home():
-    return render_template('index.html')
-@app.route('/predict',methods=['POST'])
+    return render_template('page.html')
+
+@app.route('/predict', methods=['POST'])
 def predict():
+    # Fetching form data
     Rooms = int(request.form['bedrooms'])
     Bathrooms = int(request.form['bathrooms'])
     Place = int(request.form['location'])
@@ -27,13 +22,15 @@ def predict():
     Status = int(request.form['status'])
     Facing = int(request.form['facing'])
     P_Type = int(request.form['type'])
-    #now take the above form data and convert to array
-    input_data = np.array([[Rooms,Bathrooms,Place,Area,Status,Facing,P_Type]])
-    #by taking above data we will predict the House_price
+    
+    # Input data array
+    input_data = np.array([[Rooms, Bathrooms, Place, Area, Status, Facing, P_Type]])
+    
+    # Predicting the house price
     prediction = model.predict(input_data)[0]
-    #now we will pass above predicted data to template
-    return render_template('index.html',
-                           prediction = prediction)
-app.run()
-'''
+    
+    # Returning the prediction to the template
+    return render_template('page.html', prediction=prediction)
 
+if __name__ == '__main__':
+    app.run(debug=True)
